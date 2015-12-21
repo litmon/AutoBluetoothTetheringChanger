@@ -28,7 +28,9 @@ public class BluetoothService extends Service implements BluetoothProfile.Servic
     @Override
     public void onDestroy() {
         super.onDestroy();
-        BluetoothPanUtil.close(instance);
+        if(instance != null) {
+            BluetoothPanUtil.close(instance);
+        }
     }
 
     @Override
