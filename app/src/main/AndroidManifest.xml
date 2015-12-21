@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.litmon.app.autobluetoothtetheringchanger" >
+    package="com.litmon.app.autobluetoothtetheringchanger">
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -9,22 +9,22 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
 
-        <service
-            android:name=".TetheringManipulationService"
-            android:enabled="true"
-            android:exported="true" >
+        <service android:name=".BluetoothService">
+            <!-- for BroadcastReceiver -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </service>
 
-        <receiver
-            android:name=".BluetoothReceiver"
-            android:enabled="true"
-            android:exported="true" >
+        <receiver android:name=".BluetoothReceiver">
             <intent-filter>
-                <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
-                <action android:name="android.bluetooth.device.action.ACTION_FOUND" />
-                <action android:name="android.bluetooth.device.action.ACTION_PAIRING_REQUEST" />
+                <!-- Catch Event to BLUETOOTH_STATE_CHANGED -->
+                <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
             </intent-filter>
         </receiver>
     </application>
